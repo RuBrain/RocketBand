@@ -1,90 +1,74 @@
 from store import data
 from operator import itemgetter
 
-data2 = [
-{
-"first_name": "Nikolay",
-"Last_name": "Ivanov",
-"age": 43,
-"gender": "M",
-"last_salary_up_day": "2016/01/31"
-}
-]
 #1
-def getName(): 
-    for i in data:
-        print(i["first_name"])
+def getNames(): 
+    names = []
+    for employee in data:
+        names.append(employee['first_name'])
+    return names
 
 #2
-def getEmployeesOver30YearsOld(): 
+def getEmployeesOver30YearsOld(age=30): 
     employeeList = []
-    for i in data:
-        if int(i["age"]) > 30:
-            employeeList.append(i)
+    for employee in data:
+        if int(employee['age']) > age:
+            employeeList.append(employee)
     return employeeList
 
 #3
-def getSurnameOnS(): 
+def getLastnamesStartsS(): 
     employeeList = []
-    for i in data:
-        if i["Last_name"].startswith("S"):
-            employeeList.append(i)
+    for employee in data:
+        if employee['Last_name'].startswith('S'):
+            employeeList.append(employee)
     return employeeList
 
 #4
 def getFemales():
     employeeList = []
-    for i in data:
-        if i["gender"] == "F":
-            employeeList.append(i)
+    for employee in data:
+        if employee['gender'] == 'F':
+            employeeList.append(employee)
     return employeeList
 
 #5
-def getFemalesLess30YearsOld():
+def getFemalesUnder30YearsOld(age=30):
     employeeList = []
-    for i in data:
-        if i["gender"] == "F" and int(i["age"]) < 30:
-            employeeList.append(i)
+    for employee in data:
+        if employee['gender'] == 'F' and int(employee['age']) < age:
+            employeeList.append(employee)
     return employeeList
 
 #6
-def getNamesAndSurnamesOver30YearsOld():
+def getNamesAndLastnamesOver30YearsOld(age=30):
     nameList = []
-    for i in data:
-        if int(i["age"]) > 30:
-            name = {
-                "first_name": i["first_name"],
-                "last_name": i["Last_name"]
-                }
+    for employee in data:
+        if int(employee['age']) > age:
+            name = '{} {}'.format(employee['first_name'], employee['Last_name'])
             nameList.append(name)
-
     return nameList
 
 #7
 def sortByAge():
-    dataCopy = data.copy()
-    dataCopy.sort(key=itemgetter("age"))
-    print(dataCopy)
+    return sorted(data, key=itemgetter('age'))
 
 #8
 def sortByName():
-    dataCopy = data.copy()
-    dataCopy.sort(key=itemgetter("first_name"))
-    print(dataCopy)
+    return sorted(data, key=lambda employee: employee['first_name'])
 
 #9
 def sortByAgeReverse():
-    dataCopy = data.copy()
-    dataCopy.sort(key=itemgetter("age"), reverse = True)
-    print(dataCopy)
+    return sorted(data, key=itemgetter('age'), reverse = True)
     
-#getName()
-#print(getEmployeesOver30YearsOld())
-#print(getSurnameOnS())
-#print(getFemales())
-#print(getFemalesLess30YearsOld())
-#print(getNamesAndSurnamesOver30YearsOld())
-#sortByAge()
-#sortByName()
-#sortByAgeReverse()
+# print(getNames())
+# print(getEmployeesOver30YearsOld())
+# print(getLastnamesStartsS())
+# print(getFemales())
+# print(getFemalesLess30YearsOld())
+# print(getFemalesUnder30YearsOld())
+# print(getNamesAndLastnamesOver30YearsOld())
+# print(sortByAge())
+# print(sortByName())
+# print(sortByAgeReverse())
 
