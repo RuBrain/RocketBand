@@ -82,12 +82,11 @@ def sortBySalaryUpReverse():
 #12
 def listToDict():
     result = {}
-    for item in data:
-        # result[item['first_name'] + ':' + item['Last_name']] = {
-        result['{}:{}'.format( item['first_name'], item['Last_name'] )] = {
-            'age': item['age'],
-            'gender': item['gender'],
-            'last_salary_up_day': item['last_salary_up_day']
+    for employee in data:
+        result['{}:{}'.format( employee['first_name'], employee['Last_name'] )] = {
+            'age': employee['age'],
+            'gender': employee['gender'],
+            'last_salary_up_day': employee['last_salary_up_day']
         }
     return result   
 
@@ -105,7 +104,6 @@ def listToDictWithCounter():
     counter = 1
     result = {}
     for employee in data:
-        # result[employee['first_name'] + ':' + employee['Last_name']] = {
         result['{}.{}:{}'.format( counter, employee['first_name'], employee['Last_name'] )] = {
             'age': employee['age'],
             'gender': employee['gender'],
@@ -115,7 +113,7 @@ def listToDictWithCounter():
     return result
 
 #15
-def getEmployeesNameAndSurnameMoreThan12Symbols():
+def getEmployeesNameAndLastnameMoreThan12Symbols():
     employees = []
     for employee in data:
         if len(employee['first_name'] + employee['Last_name']) > 12:
