@@ -11,14 +11,14 @@ data = [
 "Last_name": "Petrov",
 "age": 25,
 "gender": "M",
-"last_salary_up_day": "2018/04/31"
+"last_salary_up_day": "2018/04/30"
 },
 {
 "first_name": "Olga",
 "Last_name": "Davidova",
 "age": 34,
 "gender": "F",
-"last_salary_up_day": "2012/02/31"
+"last_salary_up_day": "2012/02/28"
 },
 {
 "first_name": "Irina",
