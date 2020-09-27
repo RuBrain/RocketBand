@@ -1,7 +1,7 @@
 from store import data
 from operator import itemgetter
-from datetime import date
-import datetime
+from datetime import datetime, timedelta
+
 
 #1
 def getNames(): 
@@ -62,17 +62,13 @@ def sortByName():
 #9
 def sortByAgeReverse():
     return sorted(data, key=itemgetter('age'), reverse = True)
-    
+
 #10
 def getEmployeesWithoutSalaryIncrease5years():
     employees = []
-    currentDate = date.today()
-    fiveYearsAgoDate = datetime.date(currentDate.year - 5, currentDate.month, currentDate.day)
     for employee in data:
-        lastSalaryUp = employee['last_salary_up_day'].split('/')
-        lastSalaryUpDate = datetime.date(int(lastSalaryUp[0]), int(lastSalaryUp[1]), int(lastSalaryUp[2]))
-        if lastSalaryUpDate < fiveYearsAgoDate:
-            employees.append(employee) 
+        if datetime.now() - timedelta(days=1825) >= datetime.strptime(employee['last_salary_up_day'], '%Y/%m/%d'):
+            employees.append(employee)
     return employees
 
 #11
@@ -101,15 +97,13 @@ def getLastnamesStartsSOver20():
 
 #14
 def listToDictWithCounter():
-    counter = 1
     result = {}
-    for employee in data:
-        result['{}.{}:{}'.format( counter, employee['first_name'], employee['Last_name'] )] = {
-            'age': employee['age'],
-            'gender': employee['gender'],
-            'last_salary_up_day': employee['last_salary_up_day']
+    for employee in enumerate(data):
+        result['{}.{}:{}'.format( employee[0], employee[1]['first_name'], employee[1]['Last_name'] )] = {
+            'age': employee[1]['age'],
+            'gender': employee[1]['gender'],
+            'last_salary_up_day': employee[1]['last_salary_up_day']
         }
-        counter += 1
     return result
 
 #15
@@ -126,3 +120,5 @@ def sumOfAges():
     for employee in data:
         count += employee['age']
     return count
+
+print(listToDictWithCounter())
