@@ -87,24 +87,23 @@ class Pupil(Human):
             else:
                 accurate.append(subject)
 
-    def add_raiting(self, new_subject):
+    def add_raiting(self, new_subject, subject_name, list_of_marks, direction, middle):
         new_subject = School_subject(
-        subject_name='new_sublect.title()',
-        list_of_marks = [3, 4, 4, 3, 4, 5],
-        direction='Accurate',
-        middle = []
-    
+        subject_name=new_subject,
+        list_of_marks=list_of_marks,
+        direction=direction,
+        middle=middle
         )
 
     def add_full_raiting(self, a=0, marks_list=[]):
         for subject in self.subjects:
             for i in subject.list_of_marks:
-                i.append(marks_list)
+                marks_list.append(i)
 
         for x in marks_list:
             a += x
         b = (a / len(marks_list))
-        print(b)
+        return b
 
     @property
     def full_info(self):
@@ -175,8 +174,10 @@ if __name__ == "__main__":
         middle = []
     )
 
-    print(russian_language.list_of_marks)
-    russian_language.get_middle_by_marks()
-    print(russian_language.middle)
-    
+    danil.subjects.append(russian_language)
+    danil.subjects.append(mathematics)
+    print(danil.add_full_raiting())
 
+    #print(russian_language.list_of_marks)
+    #russian_language.get_middle_by_marks()
+    #print(russian_language.middle)    
