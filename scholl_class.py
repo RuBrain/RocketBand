@@ -179,14 +179,4 @@ if __name__ == "__main__":
     russian_language.get_middle_by_marks()
     print(russian_language.middle)
     
-# school subject (школьный предмет) <-> pupil rating:
-#   - name (название предмета: физика, история, ...)
-#   - marks (список оценок)
-#   - direction (точные или гуманитарные)
-#   - middle (средняя оценка по предмету)
-#   * add mark (добавить оценку в конец)
 
-# pupil (ученик)
-#  * get full middle by direction (получить среднее по точным наукам или по гуманитарным)
-#  * get full middle (получить общую среднюю оценку)
-#  * add rating (добавить предмет с оценками ученику) 
