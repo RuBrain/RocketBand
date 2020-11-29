@@ -1,4 +1,5 @@
-
+HUMANITIES = "Humanities"
+ACCURATE = "Accurate"
 class Human:
     """"""
 
@@ -79,31 +80,36 @@ class Pupil(Human):
 
         self.parents.append(parent)
 
-    def get_full_middle_by_direction(self, humanities=[], accurate=[]):
+    def get_full_middle_by_direction(self, direction, total=0):
 
+        marks = []    
         for subject in self.subjects:
-            if subject.direction == "Humanities":
-                humanities.append(subject)
-            else:
-                accurate.append(subject)
+           if subject.direction == direction:
+               for mark in subject.list_of_marks:
+                   marks.append(mark)
 
-    def add_raiting(self, new_subject, subject_name, list_of_marks, direction, middle):
+        return self.get_average(marks)
+
+    def add_raiting(self, new_subject, subject_name, list_of_marks, direction):
         new_subject = School_subject(
         subject_name=new_subject,
         list_of_marks=list_of_marks,
-        direction=direction,
-        middle=middle
-        )
+        direction=direction)
 
-    def add_full_raiting(self, a=0, marks_list=[]):
+
+    def get_average(self, marks):
+        result = 0
+        for mark in marks:
+            result += mark
+        return result / len(marks)
+
+
+    def add_full_raiting(self, total=0, marks_list=[]):
         for subject in self.subjects:
             for i in subject.list_of_marks:
                 marks_list.append(i)
 
-        for x in marks_list:
-            a += x
-        b = (a / len(marks_list))
-        return b
+        return self.get_average(marks_list)
 
     @property
     def full_info(self):
@@ -122,20 +128,21 @@ class Pupil(Human):
 
 class School_subject:
 
-    def __init__(self, subject_name, list_of_marks, direction, middle):
+    def __init__(self, subject_name, list_of_marks, direction):
         self.subject_name = subject_name
         self.list_of_marks = list_of_marks
         self.direction = direction
-        self.middle = []
+        self.middle = 0
 
     def add_mark(self, a):
         self.list_of_marks.append(a)
 
-    def get_middle_by_marks(self, a=0):
-        for i in self.list_of_marks:
-            a += i
+    def get_middle_by_marks(self, total=0):
+        for mark in self.list_of_marks:
+            total += mark
         
-        self.middle.append(a / len(self.list_of_marks))
+        self.middle = total / len(self.list_of_marks)
+        return self.middle
 
 
 if __name__ == "__main__":
@@ -164,20 +171,16 @@ if __name__ == "__main__":
     russian_language = School_subject(
         subject_name="Russian Language", 
         list_of_marks = [5, 4, 4, 3, 4, 2],
-        direction='Humanities',
-        middle = [])
+        direction=HUMANITIES)
 
     mathematics = School_subject(
         subject_name="Mathematics",
         list_of_marks = [5, 4, 4, 3, 4, 5, 5],
-        direction='Accurate',
-        middle = []
-    )
+        direction=ACCURATE)
 
     danil.subjects.append(russian_language)
     danil.subjects.append(mathematics)
-    print(danil.add_full_raiting())
 
-    #print(russian_language.list_of_marks)
-    #russian_language.get_middle_by_marks()
-    #print(russian_language.middle)    
+    print(danil.subjects[0].get_middle_by_marks())
+    print(danil.add_full_raiting())
+    print(danil.get_full_middle_by_direction(ACCURATE))    
