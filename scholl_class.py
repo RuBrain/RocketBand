@@ -137,13 +137,10 @@ class School_subject:
     def add_mark(self, a):
         self.list_of_marks.append(a)
 
-    def get_middle_by_marks(self, total=0):
-        for mark in self.list_of_marks:
-            total += mark
+    @property
+    def middle_by_marks(self):
         
-        self.middle = total / len(self.list_of_marks)
-        return self.middle
-
+        return sum(self.list_of_marks) / len(self.list_of_marks)
 
 if __name__ == "__main__":
     danil = Pupil(
@@ -181,6 +178,7 @@ if __name__ == "__main__":
     danil.subjects.append(russian_language)
     danil.subjects.append(mathematics)
 
-    print(danil.subjects[0].get_middle_by_marks())
+    print(danil.subjects[0].middle_by_marks)
     print(danil.add_full_raiting())
-    print(danil.get_full_middle_by_direction(ACCURATE))    
+    print(danil.get_full_middle_by_direction(ACCURATE))
+    
