@@ -96,12 +96,13 @@ class Pupil(Human):
         list_of_marks=list_of_marks,
         direction=direction)
 
-
+    # @property
     def get_average(self, marks):
-        result = 0
-        for mark in marks:
-            result += mark
-        return result / len(marks)
+        return sum(marks) / len(marks)
+        #result = 0
+        #for mark in marks:
+            #result += mark
+        #return result / len(marks)
 
 
     def add_full_raiting(self, total=0, marks_list=[]):
@@ -110,6 +111,7 @@ class Pupil(Human):
                 marks_list.append(i)
 
         return self.get_average(marks_list)
+
 
     @property
     def full_info(self):
